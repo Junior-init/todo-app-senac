@@ -1,6 +1,7 @@
 import { Button, TextField } from "@mui/material"
 import "./style.css";
 import { useState } from "react";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 
 
@@ -38,17 +39,29 @@ function App() {
 
       </form>
 
-      {
-        listTarefa.map((tarefa, index) => (
-          <>
-            <div key={String(index)}>
-              {tarefa}
-            </div>
+      <div className="container-task">
+        <div className="box-task">
+          {
+            listTarefa.map((tarefa, index) => (
+              <>
+             
+                <div className="task-single">
 
-            <div className="divider"/>
-          </>
-        ))
-      }
+                  <div key={String(index)} className="task">
+                    {tarefa}
+                  </div>
+                  <HighlightOffIcon/>
+
+                </div>
+
+
+
+                <div className="divider"/>
+              </>
+            ))
+          }
+        </div>
+      </div>
 
     </>
   )
