@@ -4,18 +4,22 @@ import { useState } from "react";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 
-
 function App() {
   const [textTarefa, setTextTarefa] = useState("");
   const [listTarefa, setListTarefa] = useState([]);
 
+
   function handleClick() {
-    setListTarefa((old) => [...old, textTarefa]);
+    setListTarefa((old) => [...old, {id: Date.now(), title: textTarefa}]);
     setTextTarefa("");
   }
 
   function handleDelete(){
     setListTarefa([])
+  }
+
+  function handleDeleteTask(idTask){
+    setListTarefa(listTarefa.filter(el => el.id !== idTask))
   }
 
   return (
@@ -42,22 +46,22 @@ function App() {
       <div className="container-task">
         <div className="box-task">
           {
-            listTarefa.map((tarefa, index) => (
-              <>
+            listTarefa.map((tarefa) => (
+              <div key={tarefa.id}>
              
                 <div className="task-single">
 
-                  <div key={String(index)} className="task">
-                    {tarefa}
+                  <div  className="task">
+                    {tarefa.title}
                   </div>
-                  <HighlightOffIcon/>
+                  <HighlightOffIcon onClick={() => handleDeleteTask(tarefa.id)}/>
 
                 </div>
 
 
 
                 <div className="divider"/>
-              </>
+              </div>
             ))
           }
         </div>
